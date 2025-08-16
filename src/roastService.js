@@ -10,13 +10,13 @@ import { getPrompt } from "./prompt_helper.js";
     const resumeFile = req.file; 
 
     if (!resumeFile || !tone || !role || !language) {
-      return res.status(400).json({ message: "Required fields are missing" });
+      res.status(400).json({ message: "Required fields are missing" });
     }
 
     const { text: resume_text } = await pdfParse(resumeFile.buffer);
 
     if (!resume_text) {
-      return res.status(404).json({ message: "Resume text not generated" });
+       res.status(404).json({ message: "Resume text not generated" });
     }
 
     const prompt = getPrompt(tone, role, language);
