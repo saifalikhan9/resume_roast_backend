@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import fileUpload from "express-fileupload";
+import router from "../src/route.js";
 
 const app = express();
 
@@ -22,20 +23,7 @@ app.get("/", (req, res) => {
   res.status(200).send("Server is running 🚀");
 });
 
-app.post("/upload", (req, res) => {
-  if (!req.files || !req.files.file) {
-    return res.status(400).send("No file uploaded");
-  }
-
-  const file = req.files.file;
-  // On Vercel, you CANNOT save to local disk
-  // Instead, upload to cloud storage
-  res.send({
-    name: file.name,
-    size: file.size,
-    mimetype: file.mimetype,
-  });
-});
+app.use(router)
 
 // ✅ Export for Vercel
 export default app;
