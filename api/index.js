@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
   res.status(200).send("Server is running");
 });
-app.use(router);
+// app.use(router);
 app.listen(3001)
 
 export default app;
