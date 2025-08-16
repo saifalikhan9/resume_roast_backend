@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 // ⚠️ File upload middleware (only works in memory on Vercel)
 app.use(
   fileUpload({
-    useTempFiles: false,   // must be false, since no /tmp disk access
+    useTempFiles: false, // must be false, since no /tmp disk access
     limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
   })
 );
@@ -23,7 +23,11 @@ app.get("/", (req, res) => {
   res.status(200).send("Server is running 🚀");
 });
 
-app.use(router)
+app.use(router);
+app.use((err, req, res, next) => {
+  console.error("❌ Global error:", err);
+  res.status(500).json({ message: "Internal Server Error" });
+});
 
 // ✅ Export for Vercel
 export default app;

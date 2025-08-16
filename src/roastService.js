@@ -1,3 +1,9 @@
+import { constants } from "./constants.js";
+import model from "./gemini.js";
+import pdfParse from "pdf-parse";
+import { getPrompt } from "./prompt_helper.js";
+
+
 export const roastService = async (req, res) => {
   try {
     const { tone, role, language } = req.body;
@@ -32,3 +38,4 @@ export const roastService = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
