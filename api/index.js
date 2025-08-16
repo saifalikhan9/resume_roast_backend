@@ -15,7 +15,7 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-app.use(fileupload());
+// app.use(fileupload());
 app.get("/", (req, res) => {
   res.status(200).send("Server is running");
 });
