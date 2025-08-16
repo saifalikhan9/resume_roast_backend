@@ -1,19 +1,19 @@
 import { constants } from "./constants.js";
 import model from "./gemini.js";
-import pdfParse from "pdf-parse";
+
 import { getPrompt } from "./prompt_helper.js";
 
 
  const roastService = async (req, res) => {
   try {
-    const { tone, role, language } = req.body;
+    const { tone, role, language } = await req.body;
     const resumeFile = req.file; 
 
     if (!resumeFile || !tone || !role || !language) {
       res.status(400).json({ message: "Required fields are missing" });
     }
 
-    const { text: resume_text } = await pdfParse(resumeFile.buffer);
+    // const { text: resume_text } = await pdfParse(resumeFile.buffer);
 
     if (!resume_text) {
        res.status(404).json({ message: "Resume text not generated" });
