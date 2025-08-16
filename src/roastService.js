@@ -7,7 +7,7 @@ import { getPrompt } from "./prompt_helper.js";
 export const roastService = async (req, res) => {
   try {
     const { tone, role, language } = req.body;
-    const resumeFile = req.file; // from multer
+    const resumeFile = req.file; 
 
     if (!resumeFile || !tone || !role || !language) {
       return res.status(400).json({ message: "Required fields are missing" });

@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import fileUpload from "express-fileupload";
+
 import router from "../src/route.js";
 
 const app = express();
@@ -9,14 +9,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// ⚠️ File upload middleware (only works in memory on Vercel)
-app.use(
-  fileUpload({
-    useTempFiles: false, // must be false, since no /tmp disk access
-    limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
-  })
-);
 
 // ✅ Routes
 app.get("/", (req, res) => {
