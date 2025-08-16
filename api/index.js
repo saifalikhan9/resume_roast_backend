@@ -1,7 +1,7 @@
 import express from "express";
 import fileupload from "express-fileupload";
 import cors from "cors";
-import router from "./route.js";
+import router from "../src/route.js";
 
 // const port = 3001;
 const app = express();
