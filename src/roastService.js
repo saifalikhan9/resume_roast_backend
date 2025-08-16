@@ -1,6 +1,5 @@
 import { constants } from "./constants.js";
 import model from "./gemini.js";
-import pdfParse from "pdf-parse";
 import { getPrompt } from "./prompt_helper.js";
 import parsePDF from "./pdfparse.js";
 
