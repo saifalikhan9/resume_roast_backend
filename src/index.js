@@ -10,7 +10,9 @@ app.use(cors());
 app.use(fileupload());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-app.use(router);
+app.get("/", (req, res) => {
+  res.status(200).send("Server is running");
+});
+// app.use(router);
 
 export default app;
