@@ -15,11 +15,11 @@ app.get("/", (req, res) => {
   res.status(200).send("Server is running 🚀");
 });
 
-app.use(router);
-app.use((err, req, res, next) => {
-  console.error("❌ Global error:", err);
-  res.status(500).json({ message: "Internal Server Error" });
-});
+// app.use(router);
+// app.use((err, req, res, next) => {
+//   console.error("❌ Global error:", err);
+//   res.status(500).json({ message: "Internal Server Error" });
+// });
 
 // ✅ Export for Vercel
 export default app;

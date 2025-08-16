@@ -4,7 +4,7 @@ import pdfParse from "pdf-parse";
 import { getPrompt } from "./prompt_helper.js";
 
 
-export const roastService = async (req, res) => {
+ const roastService = async (req, res) => {
   try {
     const { tone, role, language } = req.body;
     const resumeFile = req.file; 
@@ -39,3 +39,4 @@ export const roastService = async (req, res) => {
   }
 };
 
+export default roastService
