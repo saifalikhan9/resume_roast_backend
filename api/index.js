@@ -1,16 +1,21 @@
 import express from "express";
 import cors from "cors";
-const app = express();
+import roastService from "../src/roastService.js";
+import multer from "multer";
 
+const app = express();
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
 app.get("/", (req, res) => {
   res.status(200).send("Server is running 🚀");
 });
+
+const upload = multer({ storage: multer.memoryStorage() });
+
+app.post("/generateRoast", upload.single("resume"), roastService);
 
 // app.use(router);
 // app.use((err, req, res, next) => {
