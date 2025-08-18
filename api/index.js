@@ -2,11 +2,12 @@ import express from "express";
 import cors from "cors";
 import roastService from "../src/roastService.js";
 import multer from "multer";
+import rateLimit from 'express-rate-limit';
 import { configDotenv } from "dotenv";
 
 const app = express();
 configDotenv();
-
+console.log(process.env.FRONTEND_URL)
 app.use(cors({
   origin : process.env.FRONTEND_URL,
   methods: ['GET','POST']
