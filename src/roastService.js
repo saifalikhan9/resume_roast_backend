@@ -33,7 +33,7 @@ const roastService = async (req, res) => {
       safetySettings: constants.safetySettings,
     });
 
-    return res.status(200).json({ text: result.text });
+    return res.status(200).json({ text: result.text, credits: req?.userCredits });
   } catch (error) {
     console.error("❌ Roast service error:", error);
     return res.status(500).json({ message: error.message });
