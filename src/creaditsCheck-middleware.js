@@ -3,14 +3,20 @@ import redis from "./redis.js";
 
 export const checkCredits = async (req, res, next) => {
   try {
-    const ip = req.ip || req.connection.remoteAddress;
+    const forwarded = req.headers["x-forwarded-for"];
+    console.log(forwarded)
+    // It can contain multiple IPs, the first one is usually the real client
+    const ip = forwarded
+    ? forwarded.split(",")[0].trim()
+    : req.socket.remoteAddress;
+    
+    console.log("Client IP:", ip);
 
     let credits = await redis.get(ip);
 
     if (!credits) {
-  
-      const initialCredits = 5; 
-      await redis.set(ip, initialCredits, { EX: 60 * 60 * 24 * 30 }); 
+      const initialCredits = 5;
+      await redis.set(ip, initialCredits, { EX: 60 * 60 * 24 * 30 });
       credits = initialCredits;
       console.log(`🔄 Reset credits for ${ip}: ${credits}`);
     } else {
