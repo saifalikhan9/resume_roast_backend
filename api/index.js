@@ -4,7 +4,8 @@ import roastService from "../src/roastService.js";
 import multer from "multer";
 import rateLimit from "express-rate-limit";
 import { configDotenv } from "dotenv";
-import {checkCredits} from '../src/creaditsCheck-middleware.js'
+import { checkCredits } from "../src/creaditsCheck-middleware.js";
+import redis from "../src/redis.js";
 
 const app = express();
 configDotenv();
@@ -37,7 +38,27 @@ app.get("/", (req, res) => {
 
 const upload = multer({ storage: multer.memoryStorage() });
 
-app.post("/generateRoast",checkCredits, upload.single("resume"), roastService);
+app.post("/generateRoast", checkCredits, upload.single("resume"), roastService);
+app.get("/getCredits", async (req, res) => {
+  try {
+    const forwarded = req.headers["x-forwarded-for"];
+    console.log(forwarded);
+
+    const ip = forwarded
+      ? forwarded.split(",")[0].trim()
+      : req.socket.remoteAddress;
+
+    console.log("Client IP:", ip);
+    if (!ip && !forwarded) {
+      return res.status(404).json({ error: "Ip not found" });
+    }
+    const credits = await redis.get(ip);
+    return res.status(200).json({ credits });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error });
+  }
+});
 
 // Global error handler
 app.use((err, req, res, next) => {

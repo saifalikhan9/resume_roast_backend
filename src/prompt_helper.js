@@ -38,8 +38,8 @@ export const getPrompt = (tone, role, language, entity = "resume") => {
       prompt += `\n\nRoast the ${entity} like a ${randomFriend}, keeping it playful but honest.`;
       break;
 
-    case constants.Roles.memer:
-      prompt += `\n\nRoast the ${entity} in meme style, filled with sarcasm and internet humor.`;
+    case constants.Roles.mentor:
+      prompt += `\n\nAct as a witty career mentor. Roast the ${entity} with sharp sarcasm, internet humor, and playful mockery — but always follow up with practical, constructive career guidance that's actually useful. Balance humor with real advice.`;
       break;
 
     default:

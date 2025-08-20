@@ -11,7 +11,7 @@ const Roles = {
   friend: "friend",
   interviewer: "interviewer",
   comedian: "comedian",
-  memer: "memer",
+  mentor: "mentor",
 };
 
 const languages = {
