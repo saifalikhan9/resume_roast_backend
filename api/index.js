@@ -7,13 +7,14 @@ import { configDotenv } from "dotenv";
 import { checkCredits } from "../src/creaditsCheck-middleware.js";
 import redis from "../src/redis.js";
 
+
 const app = express();
 configDotenv();
 
 app.set("trust proxy", 1);
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: process.env.FRONTEND_URL| "http://localhost:3000",
     methods: ["GET", "POST"],
   })
 );
@@ -35,6 +36,7 @@ app.use(apiLimiter);
 app.get("/", (req, res) => {
   res.status(200).send("Server is running 🚀");
 });
+
 
 const upload = multer({ storage: multer.memoryStorage() });
 

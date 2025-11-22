@@ -28,7 +28,7 @@ const roastService = async (req, res) => {
     ];
 
     const result = await model.generateContent({
-      model: "gemini-1.5-flash-latest",
+      model: "gemini-pro-latest",
       contents: content,
       safetySettings: constants.safetySettings,
     });
